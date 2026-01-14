@@ -1,59 +1,84 @@
-# PyQt-based-smart-car-upper-software-demo
-为 2026 年 E 唯协会寒假第二次培训准备的智能小车上位机示例（基于 PySide6/PyQt）。
+# Smart Car Upper Software Demo (PySide6)
 
-> **快速开始**: 强烈建议使用 Miniconda 进行环境管理，详见 [环境配置指南 (CONDA_GUIDE.md)](CONDA_GUIDE.md)。
+为 2026 年 E 唯协会寒假第二次培训准备的智能小车上位机示例工程。基于 Python 3.12 + PySide6 开发，演示了基础的 GUI 交互与游戏手柄控制逻辑。
 
-**简介**
-- **目的**: 演示如何使用 Python 和 PySide6 实现一个简单的小车上位机（GUI），包括遥控、状态显示与基础 UI 结构。
-- **适用人群**: 对嵌入式小车、机器人上位机或 PySide6 GUI 开发感兴趣的初学者与培训学员。
+> **推荐**: 详见 [环境配置指南 (CONDA_GUIDE.md)](CONDA_GUIDE.md) 了解如何从零配置开发环境。
 
-**主要功能**
-- **实时遥控显示**: 提供示例界面用于发送控制命令（方向、速度等）。
-- **UI 原型**: 包含基于 Qt Designer 的 UI 文件和对应的 Python 绑定代码示例。
-- **示例脚本**: 提供带摇杆支持的演示脚本与普通演示脚本以便对比学习。
+## 简介
+本项目旨在帮助嵌入式或机器人方向的初学者快速上手编写上位机软件：
+- **主要技术栈**: Python 3.12, PySide6 (Qt for Python), Pygame (手柄输入).
+- **核心功能**:
+    - **基础 UI 框架**：使用 Qt Designer 设计界面，分离界面与逻辑。
+    - **控件交互**：通过滑块 (Slider) 模拟小车速度与方向控制。
+    - **硬件输入**：通过 Pygame 接入 USB/蓝牙游戏手柄，实时控制界面控件。
 
-**依赖环境**
-- Python 3.8 及以上
-- PySide6
-
-推荐安装命令：
-
-```bash
-python -m pip install --upgrade pip
-pip install PySide6
+## 目录结构
+```text
+.
+├── demo_Pyside6.py          # [基础] 主程序，仅使用鼠标/触摸控制
+├── demo_Pyside6_joystick.py # [进阶] 带手柄支持的主程序 (需连接手柄)
+├── demo_ui.py               # [生成] 由 demo1.ui 编译生成的 Python UI 代码
+├── demo1.ui                 # [源码] Qt Designer 界面设计文件
+├── requirements.txt         # [依赖] pip 依赖列表
+├── environment.yml          # [依赖] Conda 环境配置文件
+├── CONDA_GUIDE.md           # [文档] 详细的环境配置教程
+└── README.md                # [文档] 项目说明书
 ```
 
-**运行示例**
-- 运行主演示（GUI）:
+## 环境配置
+
+### 方式一：使用 Conda (推荐)
+如果你安装了 Anaconda 或 Miniconda，可以一键创建环境：
+
+```bash
+# 1. 创建名为 car_env 的环境
+conda env create -f environment.yml
+
+# 2. 激活环境
+conda activate car_env
+```
+
+### 方式二：使用 pip
+如果你使用标准的 Python 环境 (建议 Python 3.10 及以上，开发环境为 3.12)：
+
+```bash
+# 1. (可选) 创建并激活虚拟环境
+python -m venv venv
+# Windows 激活:
+.\venv\Scripts\activate
+
+# 2. 安装依赖
+pip install -r requirements.txt
+```
+
+## 运行演示
+
+### 1. 基础演示
+启动基础界面，使用鼠标拖动“速度”和“方向”滑块，观察上方数值变化。
 
 ```bash
 python demo_Pyside6.py
 ```
 
-- 运行带摇杆的演示（如果有外部摇杆并希望测试）:
+### 2. 手柄控制演示
+**前提**: 请先将游戏手柄（Xbox/PS/通用手柄）连接至电脑。
+启动后，脚本会自动检测手柄。推动左摇杆控制**方向**，推动左摇杆上下（或右摇杆，视手柄映射）控制**速度**。界面上的滑块会跟随摇杆移动。
 
 ```bash
 python demo_Pyside6_joystick.py
 ```
+> *若未检测到手柄，程序会输出提示并作为普通 GUI 运行。*
 
-**文件说明**
-- **[demo_Pyside6.py](demo_Pyside6.py)**: 主演示脚本，演示如何载入 UI 并运行主界面。
-- **[demo_Pyside6_joystick.py](demo_Pyside6_joystick.py)**: 带摇杆输入的演示脚本示例。
-- **[demo_ui.py](demo_ui.py)**: UI 绑定或辅助脚本（视实现而定）。
-- **[demo1.ui](demo1.ui)**: 使用 Qt Designer 创建的界面文件，可用 Qt Designer 编辑或通过工具转换为 Python。
-- **[LICENSE](LICENSE)**: 仓库许可文件。
+## 开发说明
 
-如果需要将 `.ui` 文件转换为 Python（使用 PySide6）:
+### 修改界面
+1. 使用 **Qt Designer** 打开 `demo1.ui` 进行可视化编辑。
+2. 保存后，使用以下命令重新生成 Python 代码：
+   ```bash
+   pyside6-uic demo1.ui -o demo_ui.py
+   ```
+   *注意：不要直接修改 `demo_ui.py`，因为下次编译会覆盖它。请在 `demo_Pyside6.py` 的子类中编写逻辑。*
 
-```bash
-pyside6-uic demo1.ui -o demo_ui.py
-```
-
-**开发与二次开发建议**
-- 首先在虚拟环境中安装依赖以避免污染系统环境。
-- 在 `demo1.ui` 中修改布局后，可重新转换为 Python 或直接在运行时载入 `.ui` 文件。
-- 若要与真实小车通信，请在 GUI 中添加串口/UDP/TCP 的通信模块，并把控制命令映射到按钮或摇杆事件上。
-
-**许可 & 贡献**
-- 本项目包含 `LICENSE` 文件，请参阅以了解使用与分发限制。
+## 许可 & 贡献
+- 开源协议详见 LICENSE。
 - 欢迎提交 Issue 或 Pull Request，或在培训中根据此示例进行扩展与教学。
