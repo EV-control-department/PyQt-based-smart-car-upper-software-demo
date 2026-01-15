@@ -1,4 +1,5 @@
 PySide6==6.10.1
 pygame==2.6.1
 pygame_gui==0.6.13
+pyserial==3.5
 #建议 Python 版本: 3.12.x (开发环境: 3.12.12)
