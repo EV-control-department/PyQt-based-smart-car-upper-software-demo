@@ -15,34 +15,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QSizePolicy, QSlider,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QSizePolicy,
+    QSlider, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(457, 277)
-        self.state = QLabel(Form)
-        self.state.setObjectName(u"state")
-        self.state.setGeometry(QRect(70, 30, 91, 31))
-        font = QFont()
-        font.setPointSize(15)
-        self.state.setFont(font)
-        self.v = QLabel(Form)
-        self.v.setObjectName(u"v")
-        self.v.setGeometry(QRect(150, 30, 91, 31))
-        self.v.setFont(font)
-        self.mode = QLabel(Form)
-        self.mode.setObjectName(u"mode")
-        self.mode.setGeometry(QRect(230, 30, 91, 31))
-        self.mode.setFont(font)
-        self.direction = QLabel(Form)
-        self.direction.setObjectName(u"direction")
-        self.direction.setGeometry(QRect(310, 30, 91, 31))
-        font1 = QFont()
-        font1.setPointSize(20)
-        self.direction.setFont(font1)
+        Form.resize(465, 264)
         self.v_2 = QSlider(Form)
         self.v_2.setObjectName(u"v_2")
         self.v_2.setGeometry(QRect(90, 140, 281, 16))
@@ -55,6 +35,38 @@ class Ui_Form(object):
         self.direction_2.setMinimum(-100)
         self.direction_2.setMaximum(100)
         self.direction_2.setOrientation(Qt.Orientation.Horizontal)
+        self.horizontalLayoutWidget = QWidget(Form)
+        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
+        self.horizontalLayoutWidget.setGeometry(QRect(10, 20, 451, 80))
+        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.v = QLabel(self.horizontalLayoutWidget)
+        self.v.setObjectName(u"v")
+        font = QFont()
+        font.setPointSize(15)
+        self.v.setFont(font)
+
+        self.horizontalLayout.addWidget(self.v)
+
+        self.direction = QLabel(self.horizontalLayoutWidget)
+        self.direction.setObjectName(u"direction")
+        self.direction.setFont(font)
+
+        self.horizontalLayout.addWidget(self.direction)
+
+        self.state = QLabel(self.horizontalLayoutWidget)
+        self.state.setObjectName(u"state")
+        self.state.setFont(font)
+
+        self.horizontalLayout.addWidget(self.state)
+
+        self.mode = QLabel(self.horizontalLayoutWidget)
+        self.mode.setObjectName(u"mode")
+        self.mode.setFont(font)
+
+        self.horizontalLayout.addWidget(self.mode)
+
 
         self.retranslateUi(Form)
 
@@ -63,9 +75,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.state.setText(QCoreApplication.translate("Form", u"\u72b6\u6001", None))
         self.v.setText(QCoreApplication.translate("Form", u"\u901f\u5ea6", None))
-        self.mode.setText(QCoreApplication.translate("Form", u"\u6a21\u5f0f", None))
         self.direction.setText(QCoreApplication.translate("Form", u"\u89d2\u5ea6", None))
+        self.state.setText(QCoreApplication.translate("Form", u"\u72b6\u6001", None))
+        self.mode.setText(QCoreApplication.translate("Form", u"\u6a21\u5f0f", None))
     # retranslateUi
 
