@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"standard_plan\startup_stm32f103xb.o"
+"standard_plan\main.o"
+"standard_plan\gpio.o"
+"standard_plan\tim.o"
+"standard_plan\usart.o"
+"standard_plan\stm32f1xx_it.o"
+"standard_plan\stm32f1xx_hal_msp.o"
+"standard_plan\stm32f1xx_hal_gpio_ex.o"
+"standard_plan\stm32f1xx_hal_tim.o"
+"standard_plan\stm32f1xx_hal_tim_ex.o"
+"standard_plan\stm32f1xx_hal.o"
+"standard_plan\stm32f1xx_hal_rcc.o"
+"standard_plan\stm32f1xx_hal_rcc_ex.o"
+"standard_plan\stm32f1xx_hal_gpio.o"
+"standard_plan\stm32f1xx_hal_dma.o"
+"standard_plan\stm32f1xx_hal_cortex.o"
+"standard_plan\stm32f1xx_hal_pwr.o"
+"standard_plan\stm32f1xx_hal_flash.o"
+"standard_plan\stm32f1xx_hal_flash_ex.o"
+"standard_plan\stm32f1xx_hal_exti.o"
+"standard_plan\stm32f1xx_hal_uart.o"
+"standard_plan\system_stm32f1xx.o"
+"standard_plan\motor.o"
+--strict --scatter "Standard_plan\Standard_plan.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Standard_plan.map" -o Standard_plan\Standard_plan.axf
